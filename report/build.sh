@@ -4,18 +4,30 @@ set -euo pipefail
 cd "$(dirname "$0")"
 mkdir -p dist
 
-pandoc helm-report.md \
-  --from markdown \
+inputs=(metadata.yaml sections/*.md)
+
+# PNG copies of the SVG figures for the DOCX (pandoc cannot embed SVG without rsvg-convert).
+for svg in figures/*.svg; do
+  name=$(basename "$svg" .svg)
+  printf '#set page(width: auto, height: auto, margin: 0pt)\n#image("/%s")\n' "$svg" > .fig.typ
+  typst compile --root . --ppi 200 .fig.typ "figures/$name.png"
+done
+rm -f .fig.typ
+
+pandoc "${inputs[@]}" \
+  --from markdown --columns=10000 \
   --to typst --standalone \
   -V template=/style/conf.typ \
+  --default-image-extension=svg \
   --resource-path=.:figures \
-  -o dist/helm-report.typ
+  -o .build.typ
 
-typst compile --root . dist/helm-report.typ dist/helm-report.pdf
+typst compile --root . .build.typ dist/helm-report.pdf
 
-pandoc helm-report.md \
-  --from markdown \
+pandoc "${inputs[@]}" \
+  --from markdown --columns=10000 \
   --resource-path=.:figures \
+  --default-image-extension=png \
   --toc --toc-depth=2 \
   -o dist/helm-report.docx
 

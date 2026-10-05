@@ -93,6 +93,8 @@
     fill: (_, y) => if y == 0 { tint },
   )
   show table: set text(size: 8.5pt)
+  // pandoc wraps tables in align(center); keep cell text left unless a column says otherwise.
+  show table: set align(left)
   show table.cell.where(y: 0): set text(weight: "bold")
   show figure.where(kind: table): set block(breakable: true)
   show figure.caption: set text(size: 8.5pt, fill: muted)
