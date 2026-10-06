@@ -45,9 +45,15 @@
     #if date != none [#text(size: 11pt, fill: muted)[#date]]
     #v(2fr)
     #text(size: 8.5pt, fill: muted)[
-      Confidential. Prepared for the Client's internal decision-making. This report
-      is not legal, tax or investment advice; regulatory questions are identified for
-      the Client's legal counsel.
+      #if lang == "vi" [
+        Bảo mật. Tài liệu được lập để phục vụ việc ra quyết định nội bộ của Khách hàng.
+        Báo cáo này không phải là tư vấn pháp lý, thuế hay đầu tư; các câu hỏi pháp lý
+        được nêu để luật sư tư vấn của Khách hàng xem xét.
+      ] else [
+        Confidential. Prepared for the Client's internal decision-making. This report
+        is not legal, tax or investment advice; regulatory questions are identified for
+        the Client's legal counsel.
+      ]
     ]
   ]
 

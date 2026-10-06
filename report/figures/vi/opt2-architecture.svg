@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 470" width="820" height="470" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"><defs><marker id="m-money" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f855a"/></marker><marker id="m-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f6f8b"/></marker><marker id="m-ctrl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker><marker id="m-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c53030"/></marker></defs><rect width="100%" height="100%" fill="white"/><path d="M110.0,270 L110.0,280.0 L110.0,280.0 L110.0,290" fill="none" stroke="#b7791f" stroke-width="1.5" marker-end="url(#m-ctrl)"/>
+<path d="M305.0,346 L305.0,356.0 L305.0,356.0 L305.0,366" fill="none" stroke="#1f6f8b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#m-data)"/>
+<path d="M500.0,270 L500.0,280.0 L500.0,280.0 L500.0,290" fill="none" stroke="#b7791f" stroke-width="1.5" marker-end="url(#m-ctrl)"/>
+<rect x="20" y="20" width="780" height="40" rx="4" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.4"/>
+<text x="410.0" y="37.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Ứng dụng web cho Thành viên (Cyclone)</text>
+<text x="410.0" y="50.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">đăng ký · link giới thiệu · xem đội nhóm · ví · nạp · rút</text>
+<rect x="20" y="80" width="780" height="40" rx="4" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.4"/>
+<text x="410.0" y="97.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Back office quản trị (Cyclone)</text>
+<text x="410.0" y="110.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">phân quyền · phê duyệt maker-checker · nhật ký kiểm toán · liên kết ticket</text>
+<rect x="20" y="140" width="780" height="36" rx="4" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.4"/>
+<text x="410.0" y="155.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Lớp tích hợp và điều phối (Cyclone)</text>
+<text x="410.0" y="168.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">sự kiện idempotent · webhook · thử lại · cổng tính năng (cấp KYC, khu vực, kill switch)</text>
+<rect x="20" y="200" width="180" height="70" rx="4" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.4"/>
+<text x="110.0" y="226.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Sổ cái nền tảng</text>
+<text x="110.0" y="239.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">nguồn dữ liệu tài chính gốc duy nhất</text>
+<text x="110.0" y="252.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">đối soát</text>
+<rect x="215" y="200" width="180" height="70" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="305.0" y="226.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Lõi MLM (MLM Soft)</text>
+<text x="305.0" y="239.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">Cây bảo trợ · phiên bản kế hoạch</text>
+<text x="305.0" y="252.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">Tính hoa hồng</text>
+<rect x="410" y="200" width="180" height="70" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="500.0" y="226.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Lớp ví (Privy)</text>
+<text x="500.0" y="239.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">Ví nhúng của Thành viên</text>
+<text x="500.0" y="252.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">chính sách · Earn API</text>
+<rect x="605" y="200" width="195" height="70" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="702.5" y="226.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Xác minh (Sumsub / Didit)</text>
+<text x="702.5" y="239.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">cấp KYC · trừng phạt</text>
+<text x="702.5" y="252.0" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">sàng lọc ví</text>
+<rect x="20" y="290" width="180" height="56" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="110.0" y="315.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Treasury của nhà vận hành</text>
+<text x="110.0" y="328.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">key quorum hoặc Cobo / Fireblocks</text>
+<rect x="215" y="290" width="180" height="56" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="305.0" y="315.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Indexer / RPC</text>
+<text x="305.0" y="328.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">kiểm tra khoản nạp độc lập</text>
+<rect x="410" y="290" width="180" height="56" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="500.0" y="315.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Yield adapter (giai đoạn sau)</text>
+<text x="500.0" y="328.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">Privy Earn → Morpho / Aave</text>
+<rect x="605" y="290" width="195" height="56" rx="4" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="702.5" y="315.5" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Helpdesk</text>
+<text x="702.5" y="328.5" font-size="9.5" text-anchor="middle" fill="#5b6b7f" font-weight="normal">Zendesk / Freshdesk</text>
+<rect x="20" y="366" width="570" height="40" rx="4" fill="#eaf5ec" stroke="#2f855a" stroke-width="1.4"/>
+<text x="305.0" y="390.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Blockchain công khai (tài sản và mạng do các thành phần đã chọn hỗ trợ)</text>
+<rect x="605" y="366" width="195" height="40" rx="4" fill="#eef0f3" stroke="#5b6b7f" stroke-width="1.4"/>
+<text x="702.5" y="390.0" font-size="11" text-anchor="middle" fill="#1b2a41" font-weight="bold">Thành viên · nhân viên hỗ trợ</text>
+<rect x="10" y="436" width="14" height="10" fill="#e6f0f5" stroke="#1f6f8b" stroke-width="1.2"/>
+<text x="30" y="445" font-size="9.5" fill="#5b6b7f">Mua / bên thứ ba</text>
+<rect x="160" y="436" width="14" height="10" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.2"/>
+<text x="180" y="445" font-size="9.5" fill="#5b6b7f">Cyclone xây dựng</text>
+<rect x="310" y="436" width="14" height="10" fill="#eef0f3" stroke="#5b6b7f" stroke-width="1.2"/>
+<text x="330" y="445" font-size="9.5" fill="#5b6b7f">Thành viên / bên ngoài</text>
+<rect x="460" y="436" width="14" height="10" fill="#eaf5ec" stroke="#2f855a" stroke-width="1.2"/>
+<text x="480" y="445" font-size="9.5" fill="#5b6b7f">Vị trí on-chain</text></svg>

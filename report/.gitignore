@@ -1,3 +1,4 @@
 dist/
 .build.typ
 figures/*.png
+figures/vi/*.png

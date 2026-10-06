@@ -10,7 +10,121 @@ scales the SVG to the text width.
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-OUT = Path(__file__).parent
+BASE = Path(__file__).parent
+OUT = BASE
+LANG = "en"
+VI = {
+    'Purchased / third party': 'Mua / bên thứ ba',
+    'Cyclone-built': 'Cyclone xây dựng',
+    'Member / external': 'Thành viên / bên ngoài',
+    'On-chain location': 'Vị trí on-chain',
+    'Funds movement': 'Dòng tiền',
+    'Data / events': 'Dữ liệu / sự kiện',
+    'Control / approval': 'Kiểm soát / phê duyệt',
+    'Member web app (Cyclone)': 'Ứng dụng web cho Thành viên (Cyclone)',
+    'signup · referral link · team view · wallet · Deposits · withdrawals': 'đăng ký · link giới thiệu · xem đội nhóm · ví · nạp · rút',
+    'Admin back office (Cyclone)': 'Back office quản trị (Cyclone)',
+    'roles · maker-checker approvals · audit log · case links': 'phân quyền · phê duyệt maker-checker · nhật ký kiểm toán · liên kết ticket',
+    'Integration layer and orchestration (Cyclone)': 'Lớp tích hợp và điều phối (Cyclone)',
+    'idempotent events · webhooks · retries · feature gates (KYC tier, jurisdiction, kill switches)': 'sự kiện idempotent · webhook · thử lại · cổng tính năng (cấp KYC, khu vực, kill switch)',
+    'Platform ledger': 'Sổ cái nền tảng',
+    'single financial source of truth': 'nguồn dữ liệu tài chính gốc duy nhất',
+    'reconciliation': 'đối soát',
+    'MLM core (MLM Soft)': 'Lõi MLM (MLM Soft)',
+    'Sponsor Tree · plan versions': 'Cây bảo trợ · phiên bản kế hoạch',
+    'Commission calculation': 'Tính hoa hồng',
+    'Wallet layer (Privy)': 'Lớp ví (Privy)',
+    'Member embedded wallets': 'Ví nhúng của Thành viên',
+    'policies · Earn API': 'chính sách · Earn API',
+    'Verification (Sumsub / Didit)': 'Xác minh (Sumsub / Didit)',
+    'KYC tiers · sanctions': 'cấp KYC · trừng phạt',
+    'wallet screening': 'sàng lọc ví',
+    'Operator treasury': 'Treasury của nhà vận hành',
+    'key quorum or Cobo / Fireblocks': 'key quorum hoặc Cobo / Fireblocks',
+    'Chain indexer / RPC': 'Indexer / RPC',
+    'independent deposit check': 'kiểm tra khoản nạp độc lập',
+    'Yield adapter (later)': 'Yield adapter (giai đoạn sau)',
+    'Privy Earn → Morpho / Aave': 'Privy Earn → Morpho / Aave',
+    'Helpdesk': 'Helpdesk',
+    'Zendesk / Freshdesk': 'Zendesk / Freshdesk',
+    'Public blockchains (assets and networks supported by the chosen components)': 'Blockchain công khai (tài sản và mạng do các thành phần đã chọn hỗ trợ)',
+    'Members · support agents': 'Thành viên · nhân viên hỗ trợ',
+    'Member-controlled': 'Thành viên kiểm soát',
+    'Operator-controlled': 'Nhà vận hành kiểm soát',
+    "Member's own wallet": 'Ví riêng của Thành viên',
+    'or exchange account': 'hoặc tài khoản sàn',
+    'Member embedded wallet': 'Ví nhúng của Thành viên',
+    'Privy, Member-owned': 'Privy, Thành viên sở hữu',
+    'External address': 'Địa chỉ bên ngoài',
+    'Member-signed withdrawal': 'lệnh rút do Thành viên ký',
+    'Lending vault (later)': 'Vault cho vay (giai đoạn sau)',
+    'Morpho / Aave, ERC-4626': 'Morpho / Aave, ERC-4626',
+    'shares held by Member': 'share do Thành viên nắm giữ',
+    'observes and reconciles': 'ghi nhận và đối soát',
+    'MLM core': 'Lõi MLM',
+    'calculates Commissions': 'tính hoa hồng',
+    'quorum approval': 'phê duyệt theo quorum',
+    'Finance approvers': 'Người duyệt tài chính',
+    'maker-checker': 'maker-checker',
+    'address screening': 'sàng lọc địa chỉ',
+    'Platform fee wallet': 'Ví phí nền tảng',
+    'share of yield only': 'chỉ phần lợi suất',
+    'crypto Deposit': 'nạp crypto',
+    'withdrawal': 'rút',
+    'deposit via scoped signer': 'nạp qua signer giới hạn',
+    'fee on yield (not principal)': 'phí trên lợi suất (không trên vốn gốc)',
+    'Commission': 'Chi trả',
+    'payout': 'hoa hồng',
+    'approved batch': 'lô đã duyệt',
+    'White-label MLM vendor (Epixel / Cloud MLM)': 'Nhà cung cấp MLM white-label (Epixel / Cloud MLM)',
+    'Member': 'Thành viên',
+    'Member portal': 'Cổng Thành viên',
+    'vendor UI, white-labelled': 'giao diện vendor, gắn thương hiệu',
+    'Comp engine': 'Engine hoa hồng',
+    'Sponsor Tree, Commissions': 'Cây bảo trợ, hoa hồng',
+    'Vendor e-wallet': 'Ví điện tử của vendor',
+    'internal balances; payouts executed inside vendor software': 'số dư nội bộ; chi trả thực hiện trong phần mềm vendor',
+    '"ROI / staking" module': 'Module "ROI / staking"',
+    'must be disabled': 'phải tắt',
+    'Vendor admin panel': 'Trang quản trị vendor',
+    'Cyclone customisation': 'Cyclone tùy biến',
+    'Crypto gateway': 'Cổng thanh toán crypto',
+    'CoinPayments (custodial)': 'CoinPayments (lưu ký)',
+    'or undocumented': 'hoặc không có tài liệu',
+    'Blockchains': 'Blockchain',
+    'Custody and signing authority not documented by any candidate · "smart contract" claims without addresses or audits': 'Không ứng viên nào công bố mô hình lưu ký và quyền ký · tuyên bố "smart contract" không kèm địa chỉ hay audit',
+    'Deposit': 'Nạp',
+    'Unverified / high risk': 'Chưa xác minh / rủi ro cao',
+    'Phase 2 only, after due diligence': 'Chỉ Giai đoạn 2, sau thẩm định',
+    'core balance': 'số dư chính',
+    'Separate trading account': 'Tài khoản giao dịch riêng',
+    'opt-in, capped amount': 'tự chọn tham gia, có hạn mức',
+    'Hyperliquid account': 'Tài khoản Hyperliquid',
+    'owned by Member': 'Thành viên sở hữu',
+    'Trade-only API key': 'API key chỉ giao dịch',
+    'cannot withdraw': 'không rút được tiền',
+    'QUANT trading engine': 'Engine giao dịch QUANT',
+    'strategy signals': 'tín hiệu chiến lược',
+    'Cyclone risk monitor': 'Giám sát rủi ro (Cyclone)',
+    'limits · kill switch': 'hạn mức · kill switch',
+    'separate sub-ledger': 'sổ phụ riêng',
+    'for trading P&L': 'cho lãi/lỗ giao dịch',
+    'Legal sign-off': 'Phê duyệt pháp lý',
+    'disclosures before': 'công bố rủi ro trước',
+    'enablement': 'khi kích hoạt',
+    'P&L': 'Lãi/lỗ',
+    'opt-in': 'tự chọn',
+    'orders': 'lệnh',
+    'Unverified component': 'Thành phần chưa xác minh',
+}
+
+
+def T(text):
+    """Translate a label line by line when rendering the Vietnamese set."""
+    if LANG != "vi" or text is None:
+        return text
+    return "\n".join(VI.get(line, line) for line in text.split("\n"))
+
 
 FONT = "Helvetica Neue, Helvetica, Arial, sans-serif"
 INK = "#1b2a41"
@@ -28,6 +142,7 @@ KINDS = {
 
 def box(b):
     _id, x, y, w, h, label, kind = b
+    label = T(label)
     fill, stroke = KINDS[kind]
     dash = ' stroke-dasharray="5 4"' if kind == "group" else ""
     rx = 4 if kind != "group" else 8
@@ -85,6 +200,7 @@ def arrow(boxes, a):
         lx, ly = x1, (y1 + y2) / 2
     out = [f'<path d="{d}" fill="none" stroke="{color}" stroke-width="1.5"{dash} '
            f'marker-end="{marker}"/>']
+    label = T(label)
     if label:
         parts = label.split("\n")
         width = max(len(p) for p in parts) * 5.4 + 8
@@ -105,7 +221,7 @@ def legend(x, y, items):
         out.append(f'<rect x="{xi}" y="{y}" width="14" height="10" fill="{fill}" '
                    f'stroke="{stroke}" stroke-width="1.2"/>')
         out.append(f'<text x="{xi + 20}" y="{y + 9}" font-size="9.5" fill="{MUTED}">'
-                   f'{escape(text)}</text>')
+                   f'{escape(T(text))}</text>')
     return "\n".join(out)
 
 
@@ -119,7 +235,7 @@ def line_legend(x, y):
         out.append(f'<line x1="{xi}" y1="{y + 5}" x2="{xi + 22}" y2="{y + 5}" '
                    f'stroke="{color}" stroke-width="1.5"{dash}/>')
         out.append(f'<text x="{xi + 28}" y="{y + 9}" font-size="9.5" fill="{MUTED}">'
-                   f'{escape(text)}</text>')
+                   f'{escape(T(text))}</text>')
     return "\n".join(out)
 
 
@@ -148,89 +264,94 @@ def render(name, width, height, boxes, arrows, legend_items, lines=True):
 STD_LEGEND = [("buy", "Purchased / third party"), ("build", "Cyclone-built"),
               ("member", "Member / external"), ("chain", "On-chain location")]
 
-# ---------------------------------------------------------------- Option 2: architecture
-render("opt2-architecture", 820, 470, [
-    ("app", 20, 20, 780, 40, "Member web app (Cyclone)\nsignup · referral link · team view · wallet · Deposits · withdrawals", "build"),
-    ("bo", 20, 80, 780, 40, "Admin back office (Cyclone)\nroles · maker-checker approvals · audit log · case links", "build"),
-    ("api", 20, 140, 780, 36, "Integration layer and orchestration (Cyclone)\nidempotent events · webhooks · retries · feature gates (KYC tier, jurisdiction, kill switches)", "build"),
-    ("led", 20, 200, 180, 70, "Platform ledger\nsingle financial source of truth\nreconciliation", "build"),
-    ("mlm", 215, 200, 180, 70, "MLM core (MLM Soft)\nSponsor Tree · plan versions\nCommission calculation", "buy"),
-    ("wal", 410, 200, 180, 70, "Wallet layer (Privy)\nMember embedded wallets\npolicies · Earn API", "buy"),
-    ("kyc", 605, 200, 195, 70, "Verification (Sumsub / Didit)\nKYC tiers · sanctions\nwallet screening", "buy"),
-    ("tre", 20, 290, 180, 56, "Operator treasury\nkey quorum or Cobo / Fireblocks", "buy"),
-    ("idx", 215, 290, 180, 56, "Chain indexer / RPC\nindependent deposit check", "buy"),
-    ("yld", 410, 290, 180, 56, "Yield adapter (later)\nPrivy Earn → Morpho / Aave", "buy"),
-    ("hd", 605, 290, 195, 56, "Helpdesk\nZendesk / Freshdesk", "buy"),
-    ("chain", 20, 366, 570, 40, "Public blockchains (assets and networks supported by the chosen components)", "chain"),
-    ("mem", 605, 366, 195, 40, "Members · support agents", "member"),
-], [
-    ("led.b", "tre.t", None, "ctrl"),
-    ("idx.b", "chain.t", None, "data"),
-    ("wal.b", "yld.t", None, "ctrl"),
-], STD_LEGEND, lines=False)
+def diagrams():
+    # ---------------------------------------------------------------- Option 2: architecture
+    render("opt2-architecture", 820, 470, [
+        ("app", 20, 20, 780, 40, "Member web app (Cyclone)\nsignup · referral link · team view · wallet · Deposits · withdrawals", "build"),
+        ("bo", 20, 80, 780, 40, "Admin back office (Cyclone)\nroles · maker-checker approvals · audit log · case links", "build"),
+        ("api", 20, 140, 780, 36, "Integration layer and orchestration (Cyclone)\nidempotent events · webhooks · retries · feature gates (KYC tier, jurisdiction, kill switches)", "build"),
+        ("led", 20, 200, 180, 70, "Platform ledger\nsingle financial source of truth\nreconciliation", "build"),
+        ("mlm", 215, 200, 180, 70, "MLM core (MLM Soft)\nSponsor Tree · plan versions\nCommission calculation", "buy"),
+        ("wal", 410, 200, 180, 70, "Wallet layer (Privy)\nMember embedded wallets\npolicies · Earn API", "buy"),
+        ("kyc", 605, 200, 195, 70, "Verification (Sumsub / Didit)\nKYC tiers · sanctions\nwallet screening", "buy"),
+        ("tre", 20, 290, 180, 56, "Operator treasury\nkey quorum or Cobo / Fireblocks", "buy"),
+        ("idx", 215, 290, 180, 56, "Chain indexer / RPC\nindependent deposit check", "buy"),
+        ("yld", 410, 290, 180, 56, "Yield adapter (later)\nPrivy Earn → Morpho / Aave", "buy"),
+        ("hd", 605, 290, 195, 56, "Helpdesk\nZendesk / Freshdesk", "buy"),
+        ("chain", 20, 366, 570, 40, "Public blockchains (assets and networks supported by the chosen components)", "chain"),
+        ("mem", 605, 366, 195, 40, "Members · support agents", "member"),
+    ], [
+        ("led.b", "tre.t", None, "ctrl"),
+        ("idx.b", "chain.t", None, "data"),
+        ("wal.b", "yld.t", None, "ctrl"),
+    ], STD_LEGEND, lines=False)
 
-# ---------------------------------------------------------------- Option 2: fund flow
-render("opt2-fundflow", 820, 390, [
-    ("g_mem", 10, 10, 430, 320, "Member-controlled", "group"),
-    ("g_op", 460, 10, 350, 320, "Operator-controlled", "group"),
-    ("ext", 30, 40, 170, 50, "Member's own wallet\nor exchange account", "member"),
-    ("mw", 230, 140, 190, 60, "Member embedded wallet\nPrivy, Member-owned", "chain"),
-    ("out", 30, 250, 170, 50, "External address\nMember-signed withdrawal", "member"),
-    ("vault", 230, 250, 190, 60, "Lending vault (later)\nMorpho / Aave, ERC-4626\nshares held by Member", "chain"),
-    ("led", 480, 40, 150, 50, "Platform ledger\nobserves and reconciles", "build"),
-    ("mlm", 650, 40, 150, 50, "MLM core\ncalculates Commissions", "buy"),
-    ("tre", 480, 140, 150, 60, "Operator treasury\nquorum approval", "chain"),
-    ("ops", 650, 140, 150, 60, "Finance approvers\nmaker-checker\naddress screening", "build"),
-    ("fee", 650, 250, 150, 60, "Platform fee wallet\nshare of yield only", "chain"),
-], [
-    ("ext.r", "mw.t", "crypto Deposit", "money"),
-    ("mw.l", "out.t", "withdrawal", "money"),
-    ("mw.b", "vault.t", "deposit via scoped signer", "money"),
-    ("vault.r", "fee.l", "fee on yield (not principal)", "money"),
-    ("tre.l", "mw.r", "Commission\npayout", "money"),
-    ("mlm.l", "led.r", None, "data"),
-    ("led.b", "tre.t", "approved batch", "ctrl"),
-    ("ops.l", "tre.r", None, "ctrl"),
-], STD_LEGEND)
+    # ---------------------------------------------------------------- Option 2: fund flow
+    render("opt2-fundflow", 820, 390, [
+        ("g_mem", 10, 10, 430, 320, "Member-controlled", "group"),
+        ("g_op", 460, 10, 350, 320, "Operator-controlled", "group"),
+        ("ext", 30, 40, 170, 50, "Member's own wallet\nor exchange account", "member"),
+        ("mw", 230, 140, 190, 60, "Member embedded wallet\nPrivy, Member-owned", "chain"),
+        ("out", 30, 250, 170, 50, "External address\nMember-signed withdrawal", "member"),
+        ("vault", 230, 250, 190, 60, "Lending vault (later)\nMorpho / Aave, ERC-4626\nshares held by Member", "chain"),
+        ("led", 480, 40, 150, 50, "Platform ledger\nobserves and reconciles", "build"),
+        ("mlm", 650, 40, 150, 50, "MLM core\ncalculates Commissions", "buy"),
+        ("tre", 480, 140, 150, 60, "Operator treasury\nquorum approval", "chain"),
+        ("ops", 650, 140, 150, 60, "Finance approvers\nmaker-checker\naddress screening", "build"),
+        ("fee", 650, 250, 150, 60, "Platform fee wallet\nshare of yield only", "chain"),
+    ], [
+        ("ext.r", "mw.t", "crypto Deposit", "money"),
+        ("mw.l", "out.t", "withdrawal", "money"),
+        ("mw.b", "vault.t", "deposit via scoped signer", "money"),
+        ("vault.r", "fee.l", "fee on yield (not principal)", "money"),
+        ("tre.l", "mw.r", "Commission\npayout", "money"),
+        ("mlm.l", "led.r", None, "data"),
+        ("led.b", "tre.t", "approved batch", "ctrl"),
+        ("ops.l", "tre.r", None, "ctrl"),
+    ], STD_LEGEND)
 
-# ---------------------------------------------------------------- Option 1: architecture + fund flow
-render("opt1-integrated", 820, 380, [
-    ("g_v", 200, 10, 410, 250, "White-label MLM vendor (Epixel / Cloud MLM)", "group"),
-    ("mem", 20, 60, 160, 50, "Member", "member"),
-    ("portal", 220, 40, 180, 50, "Member portal\nvendor UI, white-labelled", "buy"),
-    ("eng", 420, 40, 170, 50, "Comp engine\nSponsor Tree, Commissions", "buy"),
-    ("ew", 220, 120, 370, 56, "Vendor e-wallet\ninternal balances; payouts executed inside vendor software", "buy"),
-    ("roi", 220, 196, 180, 44, "\"ROI / staking\" module\nmust be disabled", "risk"),
-    ("adm", 420, 196, 170, 44, "Vendor admin panel\nCyclone customisation", "buy"),
-    ("gw", 630, 120, 170, 56, "Crypto gateway\nCoinPayments (custodial)\nor undocumented", "risk"),
-    ("chain", 630, 220, 170, 40, "Blockchains", "chain"),
-    ("cust", 20, 280, 780, 44, "Custody and signing authority not documented by any candidate · \"smart contract\" claims without addresses or audits", "risk"),
-], [
-    ("mem.r", "portal.l", None, "data"),
-    ("mem.b", "ew.l", "Deposit", "money"),
-    ("ew.r", "gw.l", None, "money"),
-    ("gw.b", "chain.t", None, "money"),
-], STD_LEGEND + [("risk", "Unverified / high risk")])
+    # ---------------------------------------------------------------- Option 1: architecture + fund flow
+    render("opt1-integrated", 820, 380, [
+        ("g_v", 200, 10, 410, 250, "White-label MLM vendor (Epixel / Cloud MLM)", "group"),
+        ("mem", 20, 60, 160, 50, "Member", "member"),
+        ("portal", 220, 40, 180, 50, "Member portal\nvendor UI, white-labelled", "buy"),
+        ("eng", 420, 40, 170, 50, "Comp engine\nSponsor Tree, Commissions", "buy"),
+        ("ew", 220, 120, 370, 56, "Vendor e-wallet\ninternal balances; payouts executed inside vendor software", "buy"),
+        ("roi", 220, 196, 180, 44, "\"ROI / staking\" module\nmust be disabled", "risk"),
+        ("adm", 420, 196, 170, 44, "Vendor admin panel\nCyclone customisation", "buy"),
+        ("gw", 630, 120, 170, 56, "Crypto gateway\nCoinPayments (custodial)\nor undocumented", "risk"),
+        ("chain", 630, 220, 170, 40, "Blockchains", "chain"),
+        ("cust", 20, 280, 780, 44, "Custody and signing authority not documented by any candidate · \"smart contract\" claims without addresses or audits", "risk"),
+    ], [
+        ("mem.r", "portal.l", None, "data"),
+        ("mem.b", "ew.l", "Deposit", "money"),
+        ("ew.r", "gw.l", None, "money"),
+        ("gw.b", "chain.t", None, "money"),
+    ], STD_LEGEND + [("risk", "Unverified / high risk")])
 
-# ---------------------------------------------------------------- Option 3: QUANT Phase 2
-render("opt3-quant", 820, 330, [
-    ("g_mem", 10, 10, 420, 250, "Member-controlled", "group"),
-    ("g_q", 450, 10, 360, 250, "Phase 2 only, after due diligence", "group"),
-    ("mw", 30, 50, 170, 56, "Member embedded wallet\ncore balance", "chain"),
-    ("sub", 240, 50, 170, 56, "Separate trading account\nopt-in, capped amount", "chain"),
-    ("hl", 240, 170, 170, 56, "Hyperliquid account\nowned by Member", "chain"),
-    ("agent", 470, 170, 150, 56, "Trade-only API key\ncannot withdraw", "buy"),
-    ("eng", 470, 50, 150, 56, "QUANT trading engine\nstrategy signals", "risk"),
-    ("mon", 660, 50, 140, 56, "Cyclone risk monitor\nlimits · kill switch", "build"),
-    ("led", 30, 170, 170, 56, "Platform ledger\nseparate sub-ledger\nfor trading P&L", "build"),
-    ("disc", 660, 170, 140, 56, "Legal sign-off\ndisclosures before\nenablement", "build"),
-], [
-    ("mw.r", "sub.l", "opt-in", "money"),
-    ("sub.b", "hl.t", None, "money"),
-    ("eng.b", "agent.t", None, "ctrl"),
-    ("agent.l", "hl.r", "orders", "ctrl"),
-    ("mon.l", "eng.r", None, "ctrl"),
-    ("hl.l", "led.r", "P&L", "data"),
-], STD_LEGEND + [("risk", "Unverified component")])
+    # ---------------------------------------------------------------- Option 3: QUANT Phase 2
+    render("opt3-quant", 820, 330, [
+        ("g_mem", 10, 10, 420, 250, "Member-controlled", "group"),
+        ("g_q", 450, 10, 360, 250, "Phase 2 only, after due diligence", "group"),
+        ("mw", 30, 50, 170, 56, "Member embedded wallet\ncore balance", "chain"),
+        ("sub", 240, 50, 170, 56, "Separate trading account\nopt-in, capped amount", "chain"),
+        ("hl", 240, 170, 170, 56, "Hyperliquid account\nowned by Member", "chain"),
+        ("agent", 470, 170, 150, 56, "Trade-only API key\ncannot withdraw", "buy"),
+        ("eng", 470, 50, 150, 56, "QUANT trading engine\nstrategy signals", "risk"),
+        ("mon", 660, 50, 140, 56, "Cyclone risk monitor\nlimits · kill switch", "build"),
+        ("led", 30, 170, 170, 56, "Platform ledger\nseparate sub-ledger\nfor trading P&L", "build"),
+        ("disc", 660, 170, 140, 56, "Legal sign-off\ndisclosures before\nenablement", "build"),
+    ], [
+        ("mw.r", "sub.l", "opt-in", "money"),
+        ("sub.b", "hl.t", None, "money"),
+        ("eng.b", "agent.t", None, "ctrl"),
+        ("agent.l", "hl.r", "orders", "ctrl"),
+        ("mon.l", "eng.r", None, "ctrl"),
+        ("hl.l", "led.r", "P&L", "data"),
+    ], STD_LEGEND + [("risk", "Unverified component")])
 
-print("wrote", sorted(p.name for p in OUT.glob("*.svg")))
+
+for LANG, OUT in (("en", BASE), ("vi", BASE / "vi")):
+    OUT.mkdir(exist_ok=True)
+    diagrams()
+    print("wrote", LANG, sorted(p.name for p in OUT.glob("*.svg")))
